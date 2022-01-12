@@ -1,0 +1,109 @@
+body {
+    margin: 10px auto;
+    min-width: 300px;
+    max-width: 100%;
+    background-color: silver;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  
+  ol {
+    margin: 0;
+    padding: 0;
+  }
+  ol li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+  }
+  
+  /* Set zebra-stripes: all odd list items to a different color */
+  ol li:nth-child(odd) {
+  background: #f9f9f9;
+  }
+  ol li:hover {
+    background: #ddd;
+  }
+ 
+
+  .card-action {
+    margin-top: 10px;
+    background-color: blue;
+  }
+
+  #myLocation {
+    width:100%;
+  }
+
+  #input {
+    width: 50%;
+    float: left;
+  }
+
+  #status {
+    width: 50%;
+    float: right
+  }
+
+  .header {
+    background-color: rgb(29, 3, 119);
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+  }
+  .header:after { 
+    content: "";
+    display: table;
+    clear: both;
+  } 
+  input {
+    margin: 0;
+    border: solid, ;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    float: center;
+    font-size: 16px;
+  }
+  .add-item {
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 305px;
+    width: 50%;
+    color: rgb(37, 28, 30);
+    float: none;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+  }
+  .add-item:hover {
+    background-color: rgb(30, 48, 238);
+    font-size: 22px;
+  }
+  #clear-list{
+    width: 30%;
+    font-weight: bold;
+    font-style: italic;
+    font-size: large;
+    cursor: wait;
+    font-family: "Times New Roman";
+    margin: 40px 35%;
+    background-color: darkblue;
+    color: black;
+  }
+  #clear-list:hover{
+    background-color: red;
+    color: blue;
+  }
+
+  .input-group {
+    float: right;
+    width:50%
+  }
