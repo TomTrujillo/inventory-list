@@ -1,62 +1,109 @@
-const location = document.querySelector('#myLocation');
-const info = document.querySelectorAll('.info');
-const trailerInput = document.querySelector('#input');
-const status = document.querySelector('#status');
-const list = document.querySelector('#myOl');
-const dateElement = document.getElementById('date');
-const add = document.getElementById('addBtn');
+const dt = new Date();
+  document.getElementById("date").innerHTML = dt.toLocaleDateString();
 
-// array to store inventory list
-let inList = [];
+// Load event listeners
+loadEventListeners();
 
-// eventListener for submit event
-trailerInput.addEventListener('submit', function(e) {
-  e.preventDefault();
-  addInfo(info.value);
-});
+function loadEventListeners() {
+  // Dom load event
+  document.addEventListener('DOMContentLoaded', getTasks);
 
-// function to add info
-function addInfo(info) {
-  if (item !== ' ') {
-    const info = {
-      name: item 
-    };
-  
-// add obj to inList Array
-    inList.push(info);
+}
 
-// clear the input box value
-    trailerInput.value = '';
+// Get tasks from local storage
+function getTasks(){
+  let tasks;
+  if(localStorage.getItem('tasks') === null) {
+    tasks = [];
+  } else {
+    tasks = JSON.parse(localStorage.getItem('tasks'));
   }
-}
 
-// function to render inList to screen
-function renderList(inList) {
-  // clear everything inside <ol> with class="inventory-items"
-  list.innerHTML = '';
-}
-
-// create a list item
-const li = document.createElement ('li');
-li.setAttribute('class', 'item');
-
-
-// function to add inventory list to local storage
-function addToLocalStorage(inList) {
-  // convert array to a string and store it
-  localStorage.setItem('inList', JSON.stringify(inList));
-  //render string to screen
-  renderList(inList);
-
-
+  tasks.forEach(function(task){
+    const li = document.createElement("li");
+    const inputValue = document.getElementById("myInput").value;
+    const t = document.createTextNode(task);
+    li.appendChild(t);
+    if (inputValue === '') {
+    // alert("You must enter a trailer # and status");
+    } else {
+      document.getElementById("myUL").appendChild(li);
+    }
+    document.getElementById("myInput").value = "";
+    const span = document.createElement("SPAN");
+    span.className = "close";
+    li.appendChild(span);
+  });
 }
 
 
+// Create a new list item when clicking on the "Add" button
+function addItem() {
+  const li = document.createElement("li");
+  const inputValue = document.getElementById("myInput").value;
+  const t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+  alert("You must enter a trailer # and status");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+  const span = document.createElement("SPAN");
+  span.className = "remove";
+  li.appendChild(span);
+
+  //Store in local storage
+  storeTaskInLocalStorage(inputValue);
+
+}
+
+function storeTaskInLocalStorage(task) {
+  let tasks;
+  if(localStorage.getItem('tasks') === null) {
+    tasks = [];
+  } else {
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+  }
+  tasks.push(task);
+
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 
 
-//Clearing the list
-// function removeAll(){
-//   let lst = document.getElementsByTagName("ol");
-//     lst[0].innerHTML = "";
-// }
+
+
+function removeAll(){
+  alert('Confirm Delete?');
+  let lst = document.getElementsByTagName("ul");
+    lst[0].innerHTML = "";
+}
+const findMyCity = () => {
+
+  const status =document.querySelector('.status');
+
+  const success = (position) => {
+      console.log(position);
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+
+      fetch(geoApiUrl)
+      .then(res => res.json())
+      .then(data => {
+          status.textContent = data.city
+      })
+  }
+
+  const error = () => {
+      status.textContent = "Unable to find your location";
+  }
+  navigator.geolocation.getCurrentPosition(success, error);
+}
+
+document.querySelector('.find-city').addEventListener('click',findMyCity);
+
+
+
