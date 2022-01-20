@@ -10,22 +10,20 @@
 <body>
         <div class="container">
             <div class="header"> 
-                <p>Date: <span id="date"></span></p>
-                <div class="container">
-                    <h3 class="status"></h3>
-                    <button class="find-city">Location</button>
-                </div>
+                <h2 style="margin:5px">Trailer Inventory</h2>
+                    <span><input type="text" id="myInput" class="info" placeholder="Trailer #/ Status"></span><br>
+                    <!-- <input type="text" id="input" class="info" placeholder="Status"> -->
+                    <div class ="add-item">
+                        <span type="button" onclick="addItem()" class="addBtn">Add</button></span>
+                    </div>
+            </div>
 
-            <h2 style="margin:5px">Trailer Inventory</h2>
-                <span><input type="text" id="myInput" class="info" placeholder="Trailer #/ Status"></span><br>
-                <!-- <input type="text" id="input" class="info" placeholder="Status"> -->
-                <div class ="add-item">
-                    <span type="button" onclick="addItem()" class="addBtn">Add</button></span>
-                </div>
+            <p>Date: <span id="date"></span></p>
+            <div class="container">
+                <h3 class="status"></h3>
+                <button class="find-city">Location</button>
             </div>
                 <ul id="myUL">
-                    
-                    
                 </ul>
                 
                     
