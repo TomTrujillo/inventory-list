@@ -71,9 +71,6 @@ function storeTaskInLocalStorage(task) {
 }
 
 
-
-
-
 function removeAll(){
   alert('Confirm Delete?');
   let lst = document.getElementsByTagName("ul");
